@@ -25,12 +25,14 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" href="images/logo_icon.png" type="image/png" sizes="16x16">
   </head>
   <body>
     <!-- START nav -->
 	 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">HOLBOS</a>
+	      <img class="navbar-brand" src="images/logo_nav.png" alt="" height="44" width="120">
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span>
 	      </button>
@@ -54,7 +56,7 @@
         <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-lg-6 col-md-6 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Major Tech Fest <br><span>HOLBOS 2019</span></h1>
-            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>20-23 Dec 2019 - Ernakulam</p>
+            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>From 1st Dec 2019 - At Ernakulam</p>
             <div id="timer" class="d-flex">
 						  <div class="time" id="days"></div>
 						  <div class="time pl-3" id="hours"></div>
@@ -75,12 +77,15 @@
 	    				    	<input type="text" class="form-control" placeholder="School ID">
 	    				    </div>
 	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Class">
+	    				    	<input type="text" class="form-control" placeholder="School Class">
 	    				    </div>
 	    				</div>
 	    				<div class="col-lg-6 col-md-6">
 	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Team/Individual">
+	    				    	<select name="Team / Individual" class="form-control">
+                                  <option value="team">Team</option>
+                                  <option value="indi">Individual</option>
+                                </select>
 	    				    </div>
 							<div class="form-group">
 	    				    	<input type="text" class="form-control" placeholder="School Name">
@@ -95,7 +100,7 @@
 	    		</div>
 				<div class="form-group">
 					<div class="checkbox">
-					   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
+					   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the <a href="#" data-toggle="modal" data-target="#tacModal">terms and conditions</a></label>
 					</div>
 				</div>
 	            <div class="form-group">
@@ -163,8 +168,8 @@
 		            <h2 class="mb-4">About Holbos</h2>
 	            </div>
 
-	            <p>HOLBOS are looking for some brilliant minds who can be a promising innovator in the field of SCIENCE, MATHS AND SOCIAL SCIENCE.</p>
-	            <p> Our country and the world around us are now in a drastic shift of technology and services. The young minds of tomorrow can be the key to those dimensions, taking that into account we are conducting a competition titled -“THEORY TO PRACTICE” a project expo primarily focusing school students from class 6 – 12 who are ready to brainstorm and bring ground breaking practical solutions from their theoretical knowledge gained from classrooms. Timeline of the competition is very short and thus all you need to do is crack your brain to find a better idea and that’s it you will be the title winner of the event. The first ever competition of its kind want all students to bring in a practical solution which if possible turned to a prototype or a presentation fitting all necessary ingredients to make a possible solution. Your countdown starts from here once you finished reading this EVENT LOG so hurry up. The competition guidelines are given below. We all are waiting to hear from you soon.</p>
+	            <p class="text-justify">HOLBOS is a pioneering company that focuses to bring in innovative culture among budding minds. The company is operational in the field of robotics and artificial intelligence producing ground breaking solutions to the current problems.</p>
+	            <p class="text-justify">HOLBOS has a different approach towards every problem that we encounter and find solutions effectively and thus we are successfully moving ahead with our current plans. HOLBOS Founder and CEO SHINIL NATH M, BTECH MECHTRONICS graduate who have a great vision and passion towards the upcoming technologies and always look forward to bring in a innovative product. The event titled “THEORY TO PRACTICE” is one of our initiatives to encourage and motivate budding talents and promote their innovative skills to lead them achieve their desired goals.</p>
 	            <div class="text-center"><a href="#event" class="btn btn-primary py-4 px-5" style="border-radius: 0;">Read Guidelines</a></div>
 	          </div>
 					</div>
@@ -180,77 +185,46 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-            <h6 class="mb-4">Event consist of 3 various stages. Details regarding each stages is mentioned below.</h6>
+          <div class="col-md-10 ftco-animate text-center pb-5">
+            <h6 class="mb-4 text-justify">HOLBOS are looking for some brilliant minds who can be a promising innovator in the field of SCIENCE, MATHS AND SOCIAL SCIENCE.</h6>
+            <div id="guideMore" class="collapse text-justify">
+            	Our country and the world around us are now in a drastic shift of technology and services. The young minds of tomorrow can be the key to those dimensions, taking that into account we are conducting a competition titled -“THEORY TO PRACTICE” a project expo primarily focusing school students from class 6 – 12 who are ready to brainstorm and bring ground breaking practical solutions from their theoretical knowledge gained from classrooms. Timeline of the competition is very short and thus all you need to do is crack your brain to find a better idea and that’s it you will be the title winner of the event. The first ever competition of its kind want all students to bring in a practical solution which if possible turned to a prototype or a presentation fitting all necessary ingredients to make a possible solution. Your countdown starts from here once you finished reading this EVENT LOG so hurry up. The competition guidelines are given below. We all are waiting to hear from you soon.<br>
+              	Event consist of 3 various stages. Details regarding each stages is mentioned below.
+            </div>
+            <a href="" class="btn btn-primary px-4 py-3" data-toggle="collapse" data-target="#guideMore">Learn More</a>
           </div>
         </div>
         <div class="row">
 	        <div class="col-md-4 ftco-animate">
 	          <div class="block-7 active">
 	            <div class="text-center">
-	            <h2 class="heading">Stage 1</h2>
+	            <h2 class="heading">Stage 1</h2><br>
+	            <img src="images/idea.png" width="180" height="180">
 	            <span class="price"><span class="number">Idea</span></span>
-	            <span class="excerpt d-block">1 Dec - 15 Dec 2019</span>
-	            
-	            <h3 class="heading-2 my-4">Rules & Regulations</h3>
-	            
-	            <ul class="pricing-text">
-	              <li>Conference Seats</li>
-	              <li>Free Wifi</li>
-	              <li>Coffee Breaks</li>
-	              <li>Lunch</li>
-	              <li>Workshops</li>
-	              <li>One Speakers</li>
-	              <li>Papers</li>
-	            </ul>
-
-	            <a href="#" class="btn btn-primary d-block px-2 py-3" data-toggle="modal" data-target="#ideaModal">Read more</a>
+	            <span class="excerpt d-block">From 1 Dec - 15 Dec 2019</span>
+	            <a href="#" class="btn btn-primary d-block px-2 py-3" data-toggle="modal" data-target="#ideaModal">Read Guidelines</a>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-md-4 ftco-animate">
 	          <div class="block-7 active">
 	            <div class="text-center">
-	            <h2 class="heading">Stage 2</h2>
+	            <h2 class="heading">Stage 2</h2><br>
+	           	<img src="images/prototype.png" width="180" height="180">
 	            <span class="price"><span class="number">Prototype</span></span>
-	            <span class="excerpt d-block">16 Dec -31 Dec 2019</span>
-	            
-	            <h3 class="heading-2 my-4">Rules & Regulations</h3>
-	            
-	            <ul class="pricing-text">
-	              <li>Conference Seats</li>
-	              <li>Free Wifi</li>
-	              <li>Coffee Breaks</li>
-	              <li>Lunch</li>
-	              <li>Workshops</li>
-	              <li>One Speakers</li>
-	              <li>Papers</li>
-	            </ul>
-
-	            <a href="#" class="btn btn-primary d-block px-2 py-3">Read more</a>
+	            <span class="excerpt d-block">From 16 Dec -31 Dec 2019</span>
+	            <a href="#" class="btn btn-primary d-block px-2 py-3" data-toggle="modal" data-target="#proModal">Read Guidelines</a>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-md-4 ftco-animate">
 	          <div class="block-7 active">
 	            <div class="text-center">
-	            <h2 class="heading">Stage 3</h2>
+	            <h2 class="heading">Stage 3</h2><br>
+	            <img src="images/grand.png" width="180" height="180">
 	            <span class="price"><span class="number">Grand</span></span>
-	            <span class="excerpt d-block">Stay tuned for date</span>
-	            
-	            <h3 class="heading-2 my-4">Rules & Regulations</h3>
-	            
-	            <ul class="pricing-text">
-	              <li>Conference Seats</li>
-	              <li>Free Wifi</li>
-	              <li>Coffee Breaks</li>
-	              <li>Lunch</li>
-	              <li>Workshops</li>
-	              <li>One Speakers</li>
-	              <li>Papers</li>
-	            </ul>
-
-	            <a href="#" class="btn btn-primary d-block px-2 py-3">Read more</a>
+	            <span class="excerpt d-block">**Stay tuned for DATE**</span>	         
+	            <a href="#" class="btn btn-primary d-block px-2 py-3" data-toggle="modal" data-target="#graModal">Read Guidelines</a>
 	            </div>
 	          </div>
 	        </div>
@@ -258,6 +232,51 @@
       </div>
     </section>
 
+    <section class="ftco-section ftco-gallery ftco-no-pt" style="padding-top: 112px; padding-bottom: 0;">
+    	<div class="container-fluid px-4">
+    		<div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-3">Event Offers</h2>
+          </div>
+        </div>
+    		<div class="row">
+					<div class="col-md-3 ftco-animate">
+						<div class="card border-success mb-3" style="max-width: 22rem; height: 310px;">
+                          <div class="card-body text-success text-center">
+                            <h5 class="card-title text-center">HOLBOS – THEORY TO PRACTICE</h5>
+                            <p class="card-text">PRIZES WORTH 50K!!</p>
+                      	  </div>
+                    	</div>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<div class="card border-success mb-3" style="max-width: 22rem; height: 310px;">
+
+                          <div class="card-body text-success text-center">
+                            <h5 class="card-title text-center">10 LUCKY WINNERS!!</h5>
+                            <p class="card-text">OUT OF THE FIRST 500 IDEA SUBMISSIONS<br>10 LUCKY WINNERS<br>GET A CHANCE TO<br>WIN A PRIZE WORTH 1K<br>EACH!!</p>
+                      	  </div>
+                    	</div>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<div class="card border-success mb-3" style="max-width: 22rem; height: 310px;">
+
+                          <div class="card-body text-success text-center">
+                            <h5 class="card-title text-center">FINALE WINNERS!!!</h5>
+                            <p class="card-text">2 FIRST PRIZES: WORTH 10 K EACH!!<br>2 SECOND PRIZES: WORTH 5K EACH!!<br>2 THIRD PRIZES:WORTH 2.5 K EACH!!<br>ALL FINAL CONTESTANTS WILL GET<br>ASSURED PRIZES!!</p>
+                      	  </div>
+                    	</div>
+					</div>
+					<div class="col-md-3 ftco-animate">
+						<div class="card border-success mb-3" style="max-width: 22rem;">
+                          <div class="card-body text-success text-center">
+                            <h5 class="card-title text-center">STAR OF HOLBOS - THEORY TO PRACTICE!!</h5>
+                            <p class="card-text">OUR EVENT POSTER WILL BE<br> AVAILABLE IN OUR WEBSITE. <br>DOWNLOAD IT AND SPREAD IT. <br>THE SCHOOL WITH MAXMUM<br> REGISTRATION WILL BE AWARDED<br> PRIZE WORTH 5K!! <br>(MINIMUM NUMBERS 100!!)</p>
+                      	  </div>
+                    	</div>
+					</div>
+        	</div>
+    	</div>
+    </section>
 
 		<section class="ftco-section">
 			<div class="container">
@@ -516,13 +535,11 @@
   <div class="modal fade" id="regModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-      
         <!-- Modal Header -->
         <div class="modal-header">
           <h2 class="modal-title">Enroll Now</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
+        </div>  
         <!-- Modal body -->
         <div class="modal-body">
           <form action="#" class="request-form ftco-animate" style="width: 100%;">
@@ -562,6 +579,75 @@
 	              <input type="submit" value="Join now" class="btn btn-primary py-3 px-4">
 	            </div>
 	    	</form>
+        </div>        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>        
+      </div>
+    </div>
+  </div>
+
+  <!-- T&C Modal -->
+  <div class="modal fade" id="tacModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Terms and Conditions</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p>
+          	1.	The participant will be only considered as registered candidate once payment is confirmed. Initial registering process will not be taken into account without payment done.<br>
+			2.	The candidate will receive a mail from our side once registration is done followed by a mail after payment is received. The two emails will be from our side don’t consider any personal or other spam mail stating confirmation. The company will not be responsible for such information and you can notify us if you receive any such mails and we will guide you further.<br>
+			3.	The student should bring their school ID once they are selected for final events. The school ID is compulsory. In case of not carrying school ID the student need to bring a concern letter from principal with school seal to take part in the final competitions.<br>
+			4.	The submission of idea for the primary stage will be the initial goal thus a keen and relevant idea will be considered for next stage. The event is time scheduled so filtering will be done accordingly. The final list of students selected for further stages will be announced then after. The decision taken by judging panel is final and no further talks will be appreciated.<br> 
+			5.	The second stage of competition is the final stage for selection to finals thus the presentation will be the key aspect of your chance to finale. So do go for revise of your work because once submitted you can’t edit it further. As we have lot many applicants to scrutinize so kindly cooperate with us and make sure you enter to finals. The decision taken will be final by the judging panel and no further talks will be appreciated.<br>
+			6.	The event dates are tentative and will be notified in our official site followed by our official social media platforms. Don’t consider any spam messages spread via Social Medias.<br>
+			7.	The dates of idea submission and prototyping if in case of any issues will be extended and will be published in the website for your understanding. Please be a regular visitor of the site throughout the event for updates.<br>
+			8.	The announcement of limited period offers and target offers are bounded with proper guidelines. The chance of getting those prizes required the person to meet the guidelines specified by the event and also the final decision will be taken by the event committee.<br>
+			9.	The cash prize announced will be distributed to winners immediately after the finale is over. The winners selected will be final and the decision will be taken by the judging panel.<br>
+			10.	A disciplined event is what we are aiming for so kindly cooperate with us and be a part of a great transformation.
+
+          </p>
+        </div>        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>        
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Idea Stage Modal -->
+  <div class="modal fade" id="ideaModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Idea Stage - Rules & Regulations</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>       
+        <!-- Modal body -->
+        <div class="modal-body">
+          •	The idea submission stage begins from DEC 1 2019 and it will be open till 15 DEC 2019.<br>
+		  •	Participant can take part in the competition as an individual or team. The registration fee for the competition is RS 100 per participant.<br>
+		  •	A team can consist of Minimum 2 members and Maximum of 4 members. A team name can be mentioned when registration is done.<br> 
+		  •	Participant should fill all the details in the register column and mention an email id for future communications. Participant who doesn’t have one can use their parent’s email id and register for the event.<br>
+		  •	The registration fees will be collected from school by our team all you need to do is pay the amount to your office with your details mentioned.<br>
+  		  •	The idea can be from science, mathematics and social science or it can be a combination of all subjects in an academics point of view. The evaluation team will consider the social impact and the practical possibilities and how cost effective will be the idea. The idea must fall into the benchmarks mentioned by us. The more you improvise the better the chance of selection.<br>
+  		  •	The idea must be submitted to us via official email id given below and also make sure to conclude within 500 words.<br>
+  		  •	The idea must be unique and should be bounded to your textbooks reference. Participant can go beyond the syllabus provided the idea presented should satisfy the evaluating team and must convey that it was a concept made from scratch all by the participant and it must be proven with your presentation. If not the idea will not be considered.<br>
+
+  		  •	The sample format of the idea inspired from textbooks is given below for your reference:<br>
+            PROBLEM STATEMENT:-<br>
+            Food is a basic necessity of everyone, but the scarcity of it makes people fight for it and many die starving. Change in climate pattern and crop failure is an issue that needs an effective solution (idea inspired from science textbook of class 9).<br>
+            SOLUTION:-<br>
+            A one roof model of farming for everyone will make a difference in our society. Every individual will get access to farming practice or can opt for a tenant land for the project and get subsidy from the government side. The project involves making food items for a region from every village township etc. The preferred one should meet the nutrients requirement and thus the problem of food scarcity can be avoided as we will take a survey of people belonging to various regions age group etc (inspired from mathematics textbook of class 6). The data taken will give the numbers and will help to produce the necessary amount for all. The transportation and other expenses can be dealt with proper channels.<br>
+
         </div>
         
         <!-- Modal footer -->
@@ -573,35 +659,51 @@
     </div>
   </div>
 
-
-  <!-- Idea Stage Modal -->
-  <div class="modal fade" id="ideaModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
+  <!-- Prototype Stage Modal -->
+  <div class="modal fade" id="proModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">      
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Idea Stage</h2>
+          <h2 class="modal-title">Prototyping Stage - Rules & Regulations</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
+        </div>       
         <!-- Modal body -->
         <div class="modal-body">
-          •	The idea submission stage begins from DEC 1 2019 and it will be open till 15 DEC 2019.
-•	Participant can take part in the competition as an individual or team. The registration fee for the competition is RS 100 per participant. 
-•	A team can consist of Minimum 2 members and Maximum of 4 members. A team name can be mentioned when registration is done. 
-•	Participant should fill all the details in the register column and mention an email id for future communications. Participant who doesn’t have one can use their parent’s email id and register for the event.
-•	The registration fees will be collected from school by our team all you need to do is pay the amount to your office with your details mentioned.
-•	The idea can be from science, mathematics and social science or it can be a combination of all subjects in an academics point of view. The evaluation team will consider the social impact and the practical possibilities and how cost effective will be the idea. The idea must fall into the benchmarks mentioned by us. The more you improvise the better the chance of selection.
-•	The idea must be submitted to us via official email id given below and also make sure to conclude within 500 words.
-•	The idea must be unique and should be bounded to your textbooks reference. Participant can go beyond the syllabus provided the idea presented should satisfy the evaluating team and must convey that it was a concept made from scratch all by the participant and it must be proven with your presentation. If not the idea will not be considered.
+          •	The prototyping stage begins from 16 Dec 2019 onwards and will close by 31 Dec 2019.<br>
+		  •	This stage involves proving you idea is a practically viable solution. The participant should make a power point presentation highlighting the core idea and the necessary elements to make it possible.<br>
+		  •	The presentation must be within 10 slides and should discuss the following headings:-<br>
+             1.	Project timeline: Time taken to complete the project.<br>
+             2.	Project diagram (if any): clear diagrams and working principle followed by formulas if any.<br>
+             3.	Project cost: material cost and final product cost when manufactured.<br>
+             4.	Materials required: list of items needed.<br>
+             5.	Impact to the society: The impact it creates to society and how it will be benefitted for the masses.<br>
+		  •	The prototype can be a working model or a model that can be easily transformed to a working prototype.<br>
+		  •	No projects which even after passing idea submission stage and not reaching the expectations of prototyping will be considered for the final selection.<br>
+		  •	The contribution from all participants in a group is mandatory and can earn you more points and the chance to finale will be easier.
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
-•	The sample format of the idea inspired from textbooks is given below for your reference:
-PROBLEM STATEMENT:-
-Food is a basic necessity of everyone, but the scarcity of it makes people fight for it and many die starving. Change in climate pattern and crop failure is an issue that needs an effective solution (idea inspired from science textbook of class 9).
-SOLUTION:-
-     A one roof model of farming for everyone will make a difference in our society. Every individual will get access to farming practice or can opt for a tenant land for the project and get subsidy from the government side. The project involves making food items for a region from every village township etc. The preferred one should meet the nutrients requirement and thus the problem of food scarcity can be avoided as we will take a survey of people belonging to various regions age group etc (inspired from mathematics textbook of class 6). The data taken will give the numbers and will help to produce the necessary amount for all. The transportation and other expenses can be dealt with proper channels.
-
+  <!-- Grand Stage Modal -->
+  <div class="modal fade" id="graModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Grand Stage - Rules & Regulations</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>       
+        <!-- Modal body -->
+        <div class="modal-body">
+          Grand finale dates will be announced soon. So stay tuned and start working on your idea.
         </div>
         
         <!-- Modal footer -->
@@ -630,8 +732,6 @@ SOLUTION:-
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
     
   </body>

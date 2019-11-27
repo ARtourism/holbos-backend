@@ -9703,7 +9703,7 @@ textarea.form-control {
   top: 0px;
   bottom: 0px;
   width: 4px;
-  background-color: #1162FB;;
+  background-color: #1162FB;
 }
 
 .event:last-child:after {
@@ -9717,7 +9717,7 @@ textarea.form-control {
   height: 60px;
   top: -60px;
   width: 4px;
-  background-color: #1162FB;;
+  background-color: #1162FB;
 }
 
 .event .event-day {
@@ -9727,7 +9727,8 @@ textarea.form-control {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: #1162FB;;
+  background: #1162FB;
+  z-index: 1;
 }
 
 .event .event-hour {
@@ -9737,7 +9738,8 @@ textarea.form-control {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #1162FB;;
+  background: #1162FB;
+  z-index: 1;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
