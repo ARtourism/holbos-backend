@@ -7,8 +7,8 @@
     
     <!-- Stock Font Link
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
-	-->
-	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap" rel="stylesheet">
+	  -->
+	  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -21,41 +21,87 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
-	-->
+	  -->
 
     <!-- Stock Links
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
-	-->
+	  -->
 
     <!-- Stock Links
     <link rel="stylesheet" href="css/flaticon.css">
-	-->
+	  -->
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="icon" href="images/logo_icon.png" type="image/png" sizes="16x16">
   </head>
   <body>
-    <!-- START nav -->
-	 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <img class="navbar-brand" src="images/logo_nav.png" alt="" height="44" width="120">
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span>
-	      </button>
+    <?php
+     require("db_config.php");
+     if ( isset($_POST["sub_email"]) ) {
+       date_default_timezone_set('Asia/Kolkata');
+       $currentDt = date( 'Y-m-d h:i:s A', time () );
+       $sql_ins1 = "INSERT INTO subscribers (sub_email, sub_dt) VALUES('".$_POST["sub_email"]."', '".$currentDt."')";
+       if ($conn->query($sql_ins1) == TRUE) {
+          $snackbar_msg = "You Has Subscribed";       
+       } 
+       else {
+          $error = "Sorry Something Went Wrong! Try Again Later";
+       }
+     }
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="#home" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="#event" class="nav-link">Event</a></li>
-	          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta mr-md-2"><a href="#" class="nav-link" data-toggle="modal" data-target="#regModal">Register Now</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	 </nav>
+     if ( isset($_POST["msg_name"]) AND isset($_POST["msg_email"]) AND isset($_POST["msg_sub"]) AND isset($_POST["msg_body"]) ) {
+       date_default_timezone_set('Asia/Kolkata');
+       $currentDt = date( 'Y-m-d h:i:s A', time () );
+       $sql_ins2 = "INSERT INTO messages (msg_name, msg_email, msg_subject, msg_body, msg_dt) VALUES('".$_POST["msg_name"]."', '".$_POST["msg_email"]."', '".$_POST["msg_sub"]."', '".$_POST["msg_body"]."', '".$currentDt."')";
+       if ($conn->query($sql_ins2) == TRUE) {
+          $snackbar_msg = "Message Sent";       
+       } 
+       else {
+          $error = "Sorry Something Went Wrong! Try Again Later";
+       }
+     }
+
+     if ( isset($_POST["reg_name"]) AND isset($_POST["reg_schoolid"]) AND isset($_POST["reg_schoolclass"]) AND isset($_POST["reg_type"]) AND isset($_POST["reg_schoolname"]) AND isset($_POST["reg_phnumber"]) AND isset($_POST["reg_tc"]) AND isset($_POST["reg_email"]) ) {
+       date_default_timezone_set('Asia/Kolkata');
+       $currentDt = date( 'Y-m-d h:i:s A', time () );
+       require("code_gen.php");
+       $sql_ins3 = "INSERT INTO registrations (reg_name, reg_type, reg_school_id, reg_school_name, reg_school_class, reg_ph_no, reg_email, reg_dnt, reg_vercode, reg_status) VALUES('".$_POST["reg_name"]."', '".$_POST["reg_type"]."', '".$_POST["reg_schoolid"]."', '".$_POST["reg_schoolname"]."', '".$_POST["reg_schoolclass"]."', '".$_POST["reg_phnumber"]."', '".$_POST["reg_email"]."', '".$currentDt."', '".$hash."', 'Form Submitted')";
+       if ($conn->query($sql_ins3) == TRUE) {
+          require("mail_config.php");
+          mail($_POST["reg_email"],"HOLBOS - Email Verification",$msg);
+          $snackbar_msg = "Check Email for Comformation!!";       
+       } 
+       else {
+          $error = "Sorry Something Went Wrong! Try Again Later";
+       }
+     }
+
+        elseif ( isset($_POST["reg_name"]) OR isset($_POST["reg_schoolid"]) OR isset($_POST["reg_schoolclass"]) OR isset($_POST["reg_type"]) OR isset($_POST["reg_schoolname"]) OR isset($_POST["reg_phnumber"]) OR isset($_POST["reg_email"]) ) {
+         $warning = "Please fill all the details!";
+       }
+       $conn->close();
+    ?>
+    <!-- START nav -->
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	     <div class="container">
+	       <img class="navbar-brand" src="images/logo_nav.png" alt="" height="44" width="120">
+	       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	         <span class="oi oi-menu"></span>
+	       </button>
+
+	       <div class="collapse navbar-collapse" id="ftco-nav">
+	         <ul class="navbar-nav ml-auto">
+	           <li class="nav-item active"><a href="#home" class="nav-link">Home</a></li>
+	           <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+	           <li class="nav-item"><a href="#event" class="nav-link">Event</a></li>
+	           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+	           <li class="nav-item cta mr-md-2"><a href="#" class="nav-link" data-toggle="modal" data-target="#regModal">Register Now</a></li>
+	         </ul>
+	       </div>
+	     </div>
+	  </nav>
     <!-- END nav -->
     
     <!-- Start HOME Section -->
@@ -64,108 +110,72 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
           <div class="col-lg-6 col-md-6 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Major Tech Fest <br><span>HOLBOS 2019</span></h1>
-            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>From 1st Dec 2019 - At Kerala</p>
+            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> ALL KERALA MAJOR TECH FEST <br><span style="font-size: 40px;">HOLBOS - THEORY TO PRACTICE </span></h1>
+            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="icon-calendar mr-2"></span>From 1st Dec 2019</p>
             <div id="timer" class="d-flex">
-			  <div class="time" id="days"></div>
-			  <div class="time pl-3" id="hours"></div>
-			  <div class="time pl-3" id="minutes"></div>
-			  <div class="time pl-3" id="seconds"></div>
-			</div>
+			        <div class="time" id="days"></div>
+			        <div class="time pl-3" id="hours"></div>
+			        <div class="time pl-3" id="minutes"></div>
+			        <div class="time pl-3" id="seconds"></div>
+			      </div>
           </div>
           <!-- <div class="col-lg-2 col"></div>-->
           <div class="col-lg-5 col-md-6 mt-0 mt-md-5 d-none d-md-block">
-          	<form action="#" class="request-form ftco-animate" style="width: 100%;">
-          		<h2>Enroll Now</h2>
+          	<form action="" method="post" class="request-form ftco-animate" style="width: 100%;">
+          		  <h2>Enroll Now</h2>
           			<div class="row">
           				<div class="col-lg-6 col-md-6">
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Your Full Name">
+	    				      <div class="form-group">
+	    				      	<input type="text" name="reg_name" class="form-control" placeholder="Your Full Name">
+	    				      </div>
+    					      <div class="form-group">
+	    				      	<input type="text" name="reg_schoolid" class="form-control" placeholder="School ID">
+	    				      </div>
+	    				      <div class="form-group">
+	    				      	<input type="text" name="reg_schoolclass" class="form-control" placeholder="School Class">
+	    				      </div>
 	    				    </div>
-    					    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School ID">
-	    				    </div>
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School Class">
-	    				    </div>
-	    				</div>
-	    				<div class="col-lg-6 col-md-6">
-	    				    <div class="form-group">
-	    				    	<select name="Team / Individual" class="form-control">
-                                  <option value="team">Team</option>
-                                  <option value="indi">Individual</option>
-                                </select>
-	    				    </div>
-							<div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School Name">
-	    				    </div>
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Mobile Number">
-	    				    </div>	
-						</div>
-				    </div>
-				<div class="form-group">
-	    			<input type="text" class="form-control" placeholder="Email Adress">
-	    		</div>
-				<div class="form-group">
-					<div class="checkbox">
-					   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the <a href="#" data-toggle="modal" data-target="#tacModal">Terms & Conditions</a></label>
-					</div>
-				</div>
-	            <div class="form-group">
-	              <input type="submit" value="Join now" class="btn btn-primary py-3 px-4">
-	            </div>
-	    	</form>
+	    				    <div class="col-lg-6 col-md-6">
+	    				      <div class="form-group">
+	    				        <select name="reg_type" class="form-control">
+                        <option value="team">Team</option>
+                        <option value="individual">Individual</option>
+                      </select>
+	    				      </div>
+							      <div class="form-group">
+	    				    	  <input type="text" name="reg_schoolname" class="form-control" placeholder="School Name">
+	    				      </div>
+	    				      <div class="form-group">
+	    				      	<input type="text" name="reg_phnumber" class="form-control" placeholder="Contact Number">
+	    				      </div>	
+						      </div>
+				        </div>
+				        <div class="form-group">
+	    		      	<input type="email" name="reg_email" class="form-control" placeholder="Email Adress">
+	    		      </div>
+                <div class="form-group">
+                  <p style="color: red;">
+                    <?php 
+                      if ( isset($warning) ) {
+                        echo $warning;
+                      } 
+                    ?>   
+                  </p>
+                </div>
+				        <div class="form-group">
+				        	<div class="checkbox">
+				        	   <label><input type="checkbox" name="reg_tc" value="1" class="mr-2"> I have read and accept the <a href="#" data-toggle="modal" data-target="#tacModal">Terms & Conditions</a></label>
+					        </div>
+				        </div>
+	              <div class="form-group">
+	                <input type="submit" value="Join now" class="btn btn-primary py-3 px-4">
+	              </div>
+	    	    </form>
           </div>
         </div>
       </div>
     </div>
     <!--End HOME Section -->
-
-    <!-- Service Section not required
-    <section class="ftco-section services-section bg-primary">
-      <div class="container">
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-placeholder"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Venue</h3>
-                <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-world"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Transport</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
-              </div>
-            </div>    
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-hotel"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Hotel</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-cooking"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">Restaurant</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
-              </div>
-            </div>      
-          </div>
-        </div>
-      </div>
-    </section>
-    -->
    	
 	<section id="about" class="ftco-section ftco-no-pt ftco-no-pb">
 		<div class="container">
@@ -177,8 +187,8 @@
 	                    <div class="pr-md-5 mr-md-5">
 		                    <h2 class="mb-4">About Holbos</h2>
 	                    </div>
-	                    <p class="text-justify">HOLBOS is a pioneering company that focuses to bring in innovative culture among budding minds. The company is operational in the field of robotics and artificial intelligence producing ground breaking solutions to the current problems.</p>
-	                    <p class="text-justify">HOLBOS has a different approach towards every problem that we encounter and find solutions effectively and thus we are successfully moving ahead with our current plans. HOLBOS Founder and CEO SHINIL NATH M, BTECH MECHTRONICS graduate who have a great vision and passion towards the upcoming technologies and always look forward to bring in a innovative product. The event titled “THEORY TO PRACTICE” is one of our initiatives to encourage and motivate budding talents and promote their innovative skills to lead them achieve their desired goals.</p>
+	                    <p class="text-justify">HOLBOS a pioneering company with a great vision forward to bring in ground breaking solutions in the field of Robotics and Artificial Intelligence. Primary goal of ours is to bring in creative and effective models that can solve day to day life problems.</p>
+	                    <p class="text-justify">Shinil Nath M , Founder and CEO of HOLBOS, a BTECH graduate in Mechatronics is a visionary who lead the company forefront preparing for a technological revolution in the near future. His determination and perseverance are the key factors that took the company to the heights we are today. “ Theory to Practice “ is one such initiative that will transform lives of many young students who can contribute very many things. We are a company which adapts and learn with the progress of technology and always target to give best for our customers. Let’s unite for a better and inspiring future.</p>
 	                    <div class="text-center"><a href="#event" class="btn btn-primary py-4 px-5" style="border-radius: 0;">Read Guidelines</a></div>
 	          		</div>
 				</div>
@@ -195,10 +205,10 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-md-10 ftco-animate text-center pb-5">
-            <h6 class="mb-1 text-justify">HOLBOS are looking for some brilliant minds who can be a promising innovator in the field of SCIENCE, MATHS AND SOCIAL SCIENCE.</h6>
+            <div class="mb-1 text-justify">HOLBOS – THEORY TO PRACTICE an all Kerala school tech fest targeting student community to bring in ground breaking solutions from their academics background gained from classroom. Students from class 6- 12 are eligible for this competition. The hidden talents are now getting a platform to showcase what they can do to transform their society for a better tomorrow. The event unlike usual Tech fest is not concerned about the academic brilliance that you expose. Instead understanding of the subject if in a case need to apply for finding better solutions then how do you do it is what matters.</div>
             <div id="guideMore" class="collapse text-justify">
-            	Our country and the world around us are now in a drastic shift of technology and services. The young minds of tomorrow can be the key to those dimensions, taking that into account we are conducting a competition titled -“THEORY TO PRACTICE” a project expo primarily focusing school students from class 6 – 12 who are ready to brainstorm and bring ground breaking practical solutions from their theoretical knowledge gained from classrooms. Timeline of the competition is very short and thus all you need to do is crack your brain to find a better idea and that’s it you will be the title winner of the event. The first ever competition of its kind want all students to bring in a practical solution which if possible turned to a prototype or a presentation fitting all necessary ingredients to make a possible solution. Your countdown starts from here once you finished reading this EVENT LOG so hurry up. The competition guidelines are given below. We all are waiting to hear from you soon.<br>
-              	Event consist of 3 various stages. Details regarding each stages is mentioned below.
+            	The idea can be from SCIENCE , MATHS and SOCIAL SCIENCE or it can be a blend of all subjects. The criteria for the selection is the core idea you put forward. Timeline of the competition is very short thus you need to frame a better idea which is not practiced anywhere else. You are getting a chance to win the title but beware the idea must be unique, no copy or existing ideas works for the event. The better you make the better it will reap for you. We all are waiting to hear from you soon.<br>Good luck participants!<br> 
+              The 3 stage event schedule and guidelines are explained in detail below: 
             </div>
             <a href="" class="btn btn-primary px-4 py-3" data-toggle="collapse" data-target="#guideMore">Learn More</a>
           </div>
@@ -231,7 +241,7 @@
 	            <div class="text-center">
 	            <h2 class="heading">Stage 3</h2><br>
 	            <img src="images/grand.png" width="180" height="180">
-	            <span class="price"><span class="number">Grand</span></span>
+	            <span class="price"><span class="number" style="font-size: 49px;">Grand Finale</span></span>
 	            <span class="excerpt d-block">**Stay tuned for DATE**</span>	         
 	            <a href="#" class="btn btn-primary d-block px-2 py-3" data-toggle="modal" data-target="#graModal">Read Guidelines</a>
 	            </div>
@@ -253,7 +263,7 @@
 	                	<div class="block-7" style="height: 90%;">
 	                        <div class="text-center">
         	                    <h2 class="heading-2" style="font-size: 18px;">HOLBOS – THEORY TO PRACTICE</h2>
-        	                    <p class="pricing-text pb-2 text-left">
+        	                    <p class="pricing-text pb-2 text-center">
         	                    • PRIZES WORTH 50K!!
         	                    </p><br><br><br><br><br><br>
         	                    <div class="mb-0">
@@ -399,9 +409,9 @@
               <p style="color: black;">Don't miss a single update. Subscribe to our notification channel to get all the important messages at instant. Let's go further.</p>
               <div class="row d-flex justify-content-center mt-4 mb-4">
                 <div class="col-md-8">
-                  <form action="#" class="subscribe-form">
+                  <form action="" class="subscribe-form" method="post">
                     <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="Enter email address">
+                      <input type="email" name="sub_email" class="form-control" placeholder="Enter email address">
                       <input type="submit" value="Subscribe" class="submit px-3">
                     </div>
                   </form>
@@ -448,22 +458,22 @@
         </div>
         <div class="row d-flex">
           <div class="col-md-12 d-flex">
-            <form action="" class="" style="width: 100%;">
+            <form action="" method="post" style="width: 100%;">
               <div class="row">
               	<div class="col-md-6">
               		<div class="form-group">
-                      <input type="text" class="form-control" placeholder="Your Name">
+                      <input type="text" name="msg_name" class="form-control" placeholder="Your Name">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Your Email">
+                      <input type="email" name="msg_email" class="form-control" placeholder="Your Email">
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Subject">
+                      <input type="text" name="msg_sub" class="form-control" placeholder="Subject">
                     </div>
               	</div>
               	<div class="col-md-6">
               		<div class="form-group">
-                      <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                      <textarea name="msg_body" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
                     </div>
                     <div class="form-group text-md-right">
                       <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5 mr-0">
@@ -486,7 +496,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">HOLBOS</h2>
-              <p>Major tech event for you.</p>
+              <p>All kerala major tech fest.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li> -->
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -531,54 +541,58 @@
   <div class="modal fade" id="regModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h2 class="modal-title">Enroll Now</h2>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>  
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="#" class="request-form ftco-animate" style="width: 100%;">
-          		<h2>Enroll Now</h2>
-          			<div class="row">
-          				<div class="col-lg-6 col-md-6">
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Your Name">
-	    				    </div>
-    					    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School ID">
-	    				    </div>
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School Class">
-	    				    </div>
-	    				</div>
-	    				<div class="col-lg-6 col-md-6">
-	    				    <div class="form-group">
-	    				    	<select name="Team / Individual" class="form-control">
-                                  <option value="team">Team</option>
-                                  <option value="indi">Individual</option>
-                                </select>
-	    				    </div>
-							<div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="School Name">
-	    				    </div>
-	    				    <div class="form-group">
-	    				    	<input type="text" class="form-control" placeholder="Mobile Number">
-	    				    </div>	
-						</div>
-				    </div>
-				<div class="form-group">
-	    			<input type="text" class="form-control" placeholder="Email Adress">
-	    		</div>
-				<div class="form-group">
-					<div class="checkbox">
-					   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the <a href="#" data-toggle="modal" data-target="#tacModal">Terms & Conditions</a></label>
-					</div>
-				</div>
-	            <div class="form-group">
-	              <input type="submit" value="Join now" class="btn btn-primary py-3 px-4">
-	            </div>
-	    	</form>
+          <form action="" method="post" class="request-form ftco-animate" style="width: 100%;">
+                <h2>Enroll Now</h2>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                      <input type="text" name="reg_name" class="form-control" placeholder="Your Full Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="reg_schoolid" class="form-control" placeholder="School ID">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="reg_schoolclass" class="form-control" placeholder="School Class">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <div class="form-group">
+                      <select name="reg_type" class="form-control">
+                        <option value="team">Team</option>
+                        <option value="individual">Individual</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="reg_schoolname" class="form-control" placeholder="School Name">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="reg_phnumber" class="form-control" placeholder="Contact Number">
+                    </div>  
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="reg_email" class="form-control" placeholder="Email Adress">
+                </div>
+                <div class="form-group">
+                  <p style="color: red;">
+                    <?php 
+                      if ( isset($warning) ) {
+                        echo $warning;
+                      } 
+                    ?>   
+                  </p>
+                </div>
+                <div class="form-group">
+                  <div class="checkbox">
+                     <label><input type="checkbox" name="reg_tc" value="1" class="mr-2"> I have read and accept the <a href="#" data-toggle="modal" data-target="#tacModal">Terms & Conditions</a></label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="submit" value="Join now" class="btn btn-primary py-3 px-4">
+                </div>
+            </form>
         </div>        
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -721,11 +735,19 @@
     </div>
   </div>
 
+  <!-- Toast -->
+  <div id="snackbar" class="snackbar"><?php echo $snackbar_msg; ?></div>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-
+  <?php
+   if ( isset($snackbar_msg) OR isset($error) ) {
+     echo '<script> var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); </script>';
+   }
+  ?>
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
