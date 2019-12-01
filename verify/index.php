@@ -39,46 +39,25 @@
   <body>
     <?php
      require("../db_config.php");
-     if ( isset($_POST["sub_email"]) ) {
-       date_default_timezone_set('Asia/Kolkata');
-       $currentDt = date( 'Y-m-d h:i:s A', time () );
-       $sql_ins1 = "INSERT INTO subscribers (sub_email, sub_dt) VALUES('".$_POST["sub_email"]."', '".$currentDt."')";
-       if ($conn->query($sql_ins1) == TRUE) {
-          $snackbar_msg = "You Has Subscribed";       
-       } 
-       else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
-       }
+     if ( isset($_GET["reg_vercode"]) ) {
+        $sql_sea = "SELECT * FROM registrations WHERE reg_vercode = '".$_GET["reg_vercode"]."'";
+        $result = $conn->query($sql_sea);
+        if ($result->num_rows > 0) {
+          $sql_stat = "UPDATE registrations SET reg_status = 'Email Verified' WHERE reg_vercode = '".$_GET["reg_vercode"]."'";
+          if ($conn->query($sql_stat) == TRUE) {
+              $snackbar_msg = "Status Changed!";
+          } else {
+              header("Location: ../error?code=1");
+          }
+        }
+        else {
+          header("Location: ../error?code=2");
+        }
      }
-
-     if ( isset($_POST["msg_name"]) AND isset($_POST["msg_email"]) AND isset($_POST["msg_sub"]) AND isset($_POST["msg_body"]) ) {
-       date_default_timezone_set('Asia/Kolkata');
-       $currentDt = date( 'Y-m-d h:i:s A', time () );
-       $sql_ins2 = "INSERT INTO messages (msg_name, msg_email, msg_subject, msg_body, msg_dt) VALUES('".$_POST["msg_name"]."', '".$_POST["msg_email"]."', '".$_POST["msg_sub"]."', '".$_POST["msg_body"]."', '".$currentDt."')";
-       if ($conn->query($sql_ins2) == TRUE) {
-          $snackbar_msg = "Message Sent";       
-       } 
-       else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
-       }
+     else {
+      header("Location: ../error?code=3");
      }
-
-     if ( isset($_POST["reg_name"]) AND isset($_POST["reg_schoolid"]) AND isset($_POST["reg_schoolclass"]) AND isset($_POST["reg_type"]) AND isset($_POST["reg_schoolname"]) AND isset($_POST["reg_phnumber"]) AND isset($_POST["reg_tc"]) AND isset($_POST["reg_email"]) ) {
-       date_default_timezone_set('Asia/Kolkata');
-       $currentDt = date( 'Y-m-d h:i:s A', time () );
-       $sql_ins3 = "INSERT INTO registrations (reg_name, reg_type, reg_school_id, reg_school_name, reg_school_class, reg_ph_no, reg_email, reg_dnt) VALUES('".$_POST["reg_name"]."', '".$_POST["reg_type"]."', '".$_POST["reg_schoolid"]."', '".$_POST["reg_schoolname"]."', '".$_POST["reg_schoolclass"]."', '".$_POST["reg_phnumber"]."', '".$_POST["reg_email"]."', '".$currentDt."')";
-       if ($conn->query($sql_ins3) == TRUE) {
-          $snackbar_msg = "Check Email for Comformation!!";       
-       } 
-       else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
-       }
-     }
-
-        if ( isset($_POST["reg_name"]) OR isset($_POST["reg_schoolid"]) OR isset($_POST["reg_schoolclass"]) OR isset($_POST["reg_type"]) OR isset($_POST["reg_schoolname"]) OR isset($_POST["reg_phnumber"]) OR isset($_POST["reg_email"]) ) {
-         $warning = "Please fill all the details!";
-       }
-       $conn->close();
+     $conn->close();
     ?>
     <!-- START nav -->
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -90,11 +69,11 @@
 
 	       <div class="collapse navbar-collapse" id="ftco-nav">
 	         <ul class="navbar-nav ml-auto">
-	           <li class="nav-item active"><a href="#home" class="nav-link">Home</a></li>
-	           <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-	           <li class="nav-item"><a href="#event" class="nav-link">Event</a></li>
-	           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-	           <li class="nav-item cta mr-md-2"><a href="#" class="nav-link" data-toggle="modal" data-target="#regModal">Register Now</a></li>
+	           <li class="nav-item active"><a href="../" class="nav-link">Home</a></li>
+	           <li class="nav-item"><a href="../" class="nav-link">About</a></li>
+	           <li class="nav-item"><a href="../" class="nav-link">Event</a></li>
+	           <li class="nav-item"><a href="../" class="nav-link">Contact</a></li>
+	           <li class="nav-item cta mr-md-2"><a href="../" class="nav-link">Register Now</a></li>
 	         </ul>
 	       </div>
 	     </div>

@@ -39,7 +39,7 @@
   <body>
     <?php
      require("db_config.php");
-     if ( isset($_POST["sub_email"]) ) {
+     if ( !empty($_POST["sub_email"]) ) {
        date_default_timezone_set('Asia/Kolkata');
        $currentDt = date( 'Y-m-d h:i:s A', time () );
        $sql_ins1 = "INSERT INTO subscribers (sub_email, sub_dt) VALUES('".$_POST["sub_email"]."', '".$currentDt."')";
@@ -47,11 +47,11 @@
           $snackbar_msg = "You Has Subscribed";       
        } 
        else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
+          $snackbar_msg = "Sorry Something Went Wrong! Try Again Later";
        }
      }
 
-     if ( isset($_POST["msg_name"]) AND isset($_POST["msg_email"]) AND isset($_POST["msg_sub"]) AND isset($_POST["msg_body"]) ) {
+     if ( !empty($_POST["msg_name"]) AND !empty($_POST["msg_email"]) AND !empty($_POST["msg_sub"]) AND !empty($_POST["msg_body"]) ) {
        date_default_timezone_set('Asia/Kolkata');
        $currentDt = date( 'Y-m-d h:i:s A', time () );
        $sql_ins2 = "INSERT INTO messages (msg_name, msg_email, msg_subject, msg_body, msg_dt) VALUES('".$_POST["msg_name"]."', '".$_POST["msg_email"]."', '".$_POST["msg_sub"]."', '".$_POST["msg_body"]."', '".$currentDt."')";
@@ -59,22 +59,26 @@
           $snackbar_msg = "Message Sent";       
        } 
        else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
+          $snackbar_msg = "Sorry Something Went Wrong! Try Again Later";
        }
      }
 
-     if ( isset($_POST["reg_name"]) AND isset($_POST["reg_schoolid"]) AND isset($_POST["reg_schoolclass"]) AND isset($_POST["reg_type"]) AND isset($_POST["reg_schoolname"]) AND isset($_POST["reg_phnumber"]) AND isset($_POST["reg_tc"]) AND isset($_POST["reg_email"]) ) {
+     if ( !empty($_POST["reg_name"]) AND !empty($_POST["reg_schoolid"]) AND !empty($_POST["reg_schoolclass"]) AND !empty($_POST["reg_type"]) AND !empty($_POST["reg_schoolname"]) AND !empty($_POST["reg_phnumber"]) AND !empty($_POST["reg_tc"]) AND !empty($_POST["reg_email"]) ) {
        date_default_timezone_set('Asia/Kolkata');
        $currentDt = date( 'Y-m-d h:i:s A', time () );
        require("code_gen.php");
        $sql_ins3 = "INSERT INTO registrations (reg_name, reg_type, reg_school_id, reg_school_name, reg_school_class, reg_ph_no, reg_email, reg_dnt, reg_vercode, reg_status) VALUES('".$_POST["reg_name"]."', '".$_POST["reg_type"]."', '".$_POST["reg_schoolid"]."', '".$_POST["reg_schoolname"]."', '".$_POST["reg_schoolclass"]."', '".$_POST["reg_phnumber"]."', '".$_POST["reg_email"]."', '".$currentDt."', '".$hash."', 'Form Submitted')";
        if ($conn->query($sql_ins3) == TRUE) {
+          /*
           require("mail_config.php");
-          mail($_POST["reg_email"],"HOLBOS - Email Verification",$msg);
+          mail($_POST["reg_email"],"HOLBOS - Email Verification",$msg, $headers);
+          */
+          require("phpmailer_config.php");
+
           $snackbar_msg = "Check Email for Comformation!!";       
        } 
        else {
-          $error = "Sorry Something Went Wrong! Try Again Later";
+          $snackbar_msg = "Sorry Something Went Wrong! Try Again Later";
        }
      }
 
@@ -736,16 +740,23 @@
   </div>
 
   <!-- Toast -->
-  <div id="snackbar" class="snackbar"><?php echo $snackbar_msg; ?></div>
+  <div id="snackbar" class="snackbar">
+    <?php 
+      if ( isset($snackbar_msg) ) {
+        echo $snackbar_msg;
+      } 
+    ?>  
+  </div>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <?php
-   if ( isset($snackbar_msg) OR isset($error) ) {
-     echo '<script> var x = document.getElementById("snackbar");
-  x.className = "show";
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); </script>';
+   if ( isset($snackbar_msg) ) {
+     echo '<script> 
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000); </script>';
    }
   ?>
   <script src="js/jquery.min.js"></script>
